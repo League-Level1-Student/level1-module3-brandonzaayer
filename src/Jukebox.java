@@ -4,14 +4,19 @@
  */
 
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -29,9 +34,11 @@ public class Jukebox implements Runnable {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
-
+Song antsdance = new Song("/extra/Disco-Ants-Go-Clubbin.mp3");
+Song antsattack = new Song("/extra/Invasion-of-the-Giant-Disco-Ants.mp3");
 		// 5. Play the Song
-
+antsdance.play();
+antsattack.play();
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -39,6 +46,17 @@ public class Jukebox implements Runnable {
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
+JFrame framme = new JFrame();
+JPanel pannel = new JPanel();
+JButton buttton = new JButton("Ant Party Jams");
+JButton button = new JButton("Ant Invasion Music");
+framme.add(pannel);
+framme.setVisible(true);
+pannel.add(button);
+pannel.add(buttton);
+buttton.addMouseListener((MouseListener) this);
+button.addMouseListener((MouseListener) this);
+
           }
 	/* Use this method to add album covers to your Panel. */
 	private JLabel loadImage(String fileName) {
