@@ -1,16 +1,12 @@
-/*
- *    Copyright (c) The League of Amazing Programmers 2013-2018
- *    Level 1
- */
-
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,24 +17,36 @@ import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
+/*
+ *    Copyright (c) The League of Amazing Programmers 2013-2018
+ *    Level 1
+ */
+
+
+
+
+
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
  * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	JButton buttton = new JButton("Ant Party Jams");
+	JButton button = new JButton("Ant Invasion Music");
+	Song antsdance = new Song("extra/Disco-Ants-Go-Clubbin.mp3");
+	Song antsattack = new Song("extra/Invasion-of-the-Giant-Disco-Ants.mp3");
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Jukebox());
+		
+		
 	}
 
            public void run() {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
-Song antsdance = new Song("/extra/Disco-Ants-Go-Clubbin.mp3");
-Song antsattack = new Song("/extra/Invasion-of-the-Giant-Disco-Ants.mp3");
+
 		// 5. Play the Song
-antsdance.play();
-antsattack.play();
+
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -48,16 +56,15 @@ antsattack.play();
 		 */
 JFrame framme = new JFrame();
 JPanel pannel = new JPanel();
-JButton buttton = new JButton("Ant Party Jams");
-JButton button = new JButton("Ant Invasion Music");
+
 framme.add(pannel);
 framme.setVisible(true);
 pannel.add(button);
 pannel.add(buttton);
-buttton.addMouseListener((MouseListener) this);
-button.addMouseListener((MouseListener) this);
-
-          }
+buttton.addActionListener((ActionListener) this);
+button.addActionListener((ActionListener) this);
+}
+         
 	/* Use this method to add album covers to your Panel. */
 	private JLabel loadImage(String fileName) {
 		URL imageURL = getClass().getResource(fileName);
@@ -65,7 +72,19 @@ button.addMouseListener((MouseListener) this);
 		return new JLabel(icon);
 	}
 
-}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		JButton buttonPressed = (JButton) arg0.getSource();
+		if (buttonPressed.equals(button)){
+			antsdance.stop();
+			antsattack.play();
+		}
+		else if (buttonPressed.equals(buttton)) {
+			antsattack.stop();
+			antsdance.play();
+		}
+	}
+           
 
 class Song {
 
@@ -151,4 +170,4 @@ class Song {
 		}
 	}
 }
-
+}
