@@ -11,16 +11,20 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
 
-	/*
-	 * We are going to hide secrets within the magic box. 
+	
+	MediaPalace SoundImage = new MediaPalace();
+	/* We are going to hide secrets within the magic box. 
 	 * When the user clicks on a secret place, stuff will happen.
 	 * 
 	 * 1. Make the frame respond to mouse clicks.
@@ -55,7 +59,9 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		frame.setVisible(true);JLabel label = SoundImage.loadImageFromTheInternet("https://www.thetimes.co.uk/imageserver/image/methode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fefb76290-9a72-11e8-9b62-17ec317258a6.png?crop=698%2C392%2C796%2C556&resize=685");
+		frame.addMouseListener(this);
+		frame.add(label);
 	}
 
 	private void loadBackgroundImage() throws Exception {
@@ -81,7 +87,14 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Test");
+		try {
+			JLabel label = SoundImage.loadImageFromTheInternet("https://www.thetimes.co.uk/imageserver/image/methode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fefb76290-9a72-11e8-9b62-17ec317258a6.png?crop=698%2C392%2C796%2C556&resize=685");
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
 	}
 
 	@Override
@@ -98,7 +111,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+d		// TODO Auto-generated method stub
 		
 	}
 
