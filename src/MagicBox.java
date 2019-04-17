@@ -24,6 +24,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	
 	MediaPalace SoundImage = new MediaPalace();
+	JFrame frame = new JFrame("The Magic Box contains many secrets...");
 	/* We are going to hide secrets within the magic box. 
 	 * When the user clicks on a secret place, stuff will happen.
 	 * 
@@ -54,12 +55,15 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	}
 
 	private void createUI() {
-		JFrame frame = new JFrame("The Magic Box contains many secrets...");
+		
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
+		
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);JLabel label = SoundImage.loadImageFromTheInternet("https://www.thetimes.co.uk/imageserver/image/methode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fefb76290-9a72-11e8-9b62-17ec317258a6.png?crop=698%2C392%2C796%2C556&resize=685");
+		frame.setSize(1100, 1100);
+		frame.setVisible(true);JLabel label = null;
+		
 		frame.addMouseListener(this);
 		frame.add(label);
 	}
@@ -88,13 +92,23 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Test");
+		
+		System.out.println(backgroundImage.getRGB(e.getX(), e.getY()));
+		if(backgroundImage.getRGB(e.getX(), e.getY())==-9911626) {
+			
+			
+		
 		try {
 			JLabel label = SoundImage.loadImageFromTheInternet("https://www.thetimes.co.uk/imageserver/image/methode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fefb76290-9a72-11e8-9b62-17ec317258a6.png?crop=698%2C392%2C796%2C556&resize=685");
+			JPanel panel = new JPanel();
+			panel.add(label);
+			frame.add(panel);
+			frame.repaint();
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	
+		}	
 	}
 
 	@Override
